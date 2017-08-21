@@ -211,7 +211,7 @@
                             layer_close();
                         });
                     }else{
-                        layer.alert('数据添加失败【'+msg.errorinfo+'】');
+                        layer.alert('数据添加失败【'+msg.errorinfo+'】',{icon:5});
                     }
                 }
 

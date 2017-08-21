@@ -92,22 +92,22 @@ class LessonController extends Controller
 			 if($validator->passes()){
 			 	//校验通过,维护数据
 				 //模拟没有维护好的数据,避免数据库找麻烦
-				 $form_data['teacher_ids'] = 10;
+				 //$form_data['teacher_ids'] = 10;
 				 
 				 Lesson::create($form_data);
 				 
 				 return ['success'=>true];
-				 
 			 }else{
 			 	//校验不通过
 				 //制作校验的错误信息
-				 $errorinfo = collect($validator->messages())->implode('0','，');    //制作校验错误信息
+				 $errorinfo = collect($validator->messages())->implode('0','，');    //制作校验错误信息  implode 以xx分割字符串
 				 return ['success'=>false,'errorinfo'=>$errorinfo];
 			 }
 			 
 		}
 		//展示添加课时form表单
-		//获得被选区的课程信息
+		//获得被选取的课程信息
+		//pluck把
 		$course = Course::pluck('course_name','course_id')->toArray();  #注意  这里的顺序是值，键  toArray把collection变成array
 		
 		return view('admin/lesson/tianjia',compact('course'));
