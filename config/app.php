@@ -136,10 +136,11 @@ return [
     */
 
     'providers' => [
-
-        /*
-         * Laravel Framework Service Providers...
-         */
+		Barryvdh\Debugbar\ServiceProvider::class,   #debug调试工具
+		
+		/*
+		 * Laravel Framework Service Providers...
+		 */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -191,8 +192,9 @@ return [
     */
 
     'aliases' => [
-
-        'App' => Illuminate\Support\Facades\App::class,
+		'Debugbar' => Barryvdh\Debugbar\Facade::class,  #debug调试工具
+	
+		'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
