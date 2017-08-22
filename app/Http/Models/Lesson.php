@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lesson extends Model
 {
@@ -11,6 +12,10 @@ class Lesson extends Model
     protected  $primaryKey = 'lesson_id';  //主键
 	//fillable 写错导致后面出了一个大BUG，存入数据的同时把_token字段往数据库里放，肯定报错啊
     protected  $fillable = ['course_id','lesson_name','cover_img','video_address','lesson_desc','lesson_duration','teacher_ids'];  //允许维护的字段
+	
+	//设置软删除
+	use SoftDeletes;
+	protected $dates = ['deleted_at'];
 	
 	/**
 	 * 与course的对应关系

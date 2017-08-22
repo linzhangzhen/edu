@@ -72,22 +72,22 @@
                 $('#video').uploadify({
                     'formData'     : {
                         'timestamp' : '<?php echo $timestamp;?>',
-						//注意laravel的_token前面的带下划线的
+                        //注意laravel的_token前面的带下划线的
                         '_token'     : '{{ csrf_token() }}'
                     },
                     'swf'      : '/uploadify/uploadify.swf',
-					//这里又把地址写错了，调试了很久才发现
+                    //这里又把地址写错了，调试了很久才发现
                     'uploader' : '{{url('admin/upload/up_video')}}',
-					//上传附件后uploadify本身可以调用回调函数感知状态信息
+                    //上传附件后uploadify本身可以调用回调函数感知状态信息
                     'onUploadSuccess' : function(file, data, response) {
                         //file 被上传附件在客户端的名字
-						//data  服务器返回的信息,是一个json的string字符串
-						//response true/false  上传是否成功
-                       // alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
-						//接收服务器端返回的数据并转化为对象格式
-						var obj = JSON.parse(data);
-						//把返回的附件路径名赋予给form表单域
-						$('[name=video_address]').val(obj.filename);
+                        //data  服务器返回的信息,是一个json的string字符串
+                        //response true/false  上传是否成功
+                        // alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+                        //接收服务器端返回的数据并转化为对象格式
+                        var obj = JSON.parse(data);
+                        //把返回的附件路径名赋予给form表单域
+                        $('[name=video_address]').val(obj.filename);
                     }
                 });
             });
@@ -124,7 +124,7 @@
                         //接收服务器端返回的数据并转化为对象格式
                         var obj = JSON.parse(data);
                         //把返回的附件路径名赋予给form表单域
-						//obj.filename =  /storage/lesson/xxxxxx.jpg
+                        //obj.filename =  /storage/lesson/xxxxxx.jpg
                         $('[name=cover_img]').val(obj.filename);
                         //把上传好的图片显示到当前页面中
                         $('#show_pic').attr('src',obj.filename);
@@ -153,7 +153,12 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>授课老师：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="checkbox" name="teacher_ids" id="teacher_ids" value="">李张三
+				<select name="laoshi[]"  multiple="multiple" style="width: 130px;height: 190px">
+					<option value="0">-请选择-</option>
+				@foreach($teacher as $k => $v)
+						<option value="{{$k}}">{{$v}}</option>
+				@endforeach
+				</select>
 			</div>
 		</div>
 		<div class="row cl">

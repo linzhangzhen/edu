@@ -27,8 +27,17 @@ Route::match(['get','post'],'admin/lesson/index','Admin\LessonController@index')
 //后台课时管理--添加
 Route::match(['get','post'],'admin/lesson/tianjia','Admin\LessonController@tianjia');
 
+//后台课时管理 -- 修改
+Route::match(['get','post'],'admin/lesson/xiugai/{lesson}','Admin\LessonController@xiugai');
+
+//后台课时管理 -- 删除
+Route::post('admin/lesson/del/{lesson}','Admin\LessonController@del');
+
 //后台上传附件--视频
 Route::post('admin/upload/up_video','Admin\UploadController@up_video');
+
+//后台 --视频播放
+Route::get('admin/lesson/video_play/{lesson}','Admin\LessonController@video_play');
 
 //后台上传附件--图片
 Route::post('admin/upload/up_pic','Admin\UploadController@up_pic');

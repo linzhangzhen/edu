@@ -107,7 +107,7 @@
                 {'data':'course.course_name'},   //通过关系查找出了course表的数据
                 {'data':'course.profession.pro_name'}, 	//通过关系再找到了专业名称 注意显示格式
                 {"defaultContent":""},
-                {'data':'video_address'},
+                {"defaultContent":""},
                 {'data':'created_at'},
                 {"defaultContent":"","className":"td-manager"}
             ],          //对【td】的信息填充
@@ -118,10 +118,10 @@
                 //dataIndex:该tr的下标索引号码
                 //var anniu = '<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'member-add.html\',\'4\',\'\',\'510\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="change_password(\'修改密码\',\'change-password.html\',\'10001\',\'600\',\'270\')" href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,\'1\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>';
                 var anniu = '\
-				<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'member-add.html\',4,\'\',510)" class="ml-5" style="text-decoration:none">\
+				<a title="编辑" href="javascript:;" onclick="member_edit(\'编辑\',\'/admin/lesson/xiugai/'+data.lesson_id+'\',4,\'\',510)" class="ml-5" style="text-decoration:none">\
 					<i class="Hui-iconfont">&#xe6df;</i>\
 				</a>\
-				<a title="删除" href="javascript:;" onclick="member_del(this,1)" class="ml-5" style="text-decoration:none">\
+				<a title="删除" href="javascript:;" onclick="member_del(this,'+data.lesson_id+')" class="ml-5" style="text-decoration:none">\
 					<i class="Hui-iconfont">&#xe6e2;</i>\
 				</a>';
                 //把anniu填充给最后一个td
@@ -131,6 +131,11 @@
 				var img_show = "<img src='"+data.cover_img+" ' alt='no pic' width='200' height='100'>";
 				$(row).find('td:eq(5)').html(img_show);
 
+				//视频播放按钮
+				var video_btn = '<input class="btn btn-success-outline radius" onclick="show_video('+data.lesson_id+')" type="button" value="播放视频">';
+				$(row).find('td:eq(6)').html(video_btn);
+
+
                 //给每个tr一个text-c
                 $(row).addClass('text-c');
             }
@@ -139,6 +144,11 @@
         });
 
     });
+    /*课时-播放视频*/
+    function show_video(lesson_id){
+        layer_show('播放视频','/admin/lesson/video_play/'+lesson_id,800,500);
+    }
+
     /*课时-添加*/
     function member_add(title,url,w,h){
         layer_show(title,url,w,h);
@@ -199,8 +209,11 @@
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
                 type: 'POST',
-                url: '',
+                url: '/admin/lesson/del/'+id,
                 dataType: 'json',
+				headers:{
+                    'X-CSRF-TOKEN':'{{csrf_token()}}'
+				},
                 success: function(data){
                     $(obj).parents("tr").remove();
                     layer.msg('已删除!',{icon:1,time:1000});
