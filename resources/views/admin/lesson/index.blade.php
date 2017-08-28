@@ -106,8 +106,8 @@
                 {'data':'lesson_name'},
                 {'data':'course.course_name'},   //通过关系查找出了course表的数据
                 {'data':'course.profession.pro_name'}, 	//通过关系再找到了专业名称 注意显示格式
-                {"defaultContent":""},
-                {"defaultContent":""},
+                {"defaultContent":""},			//封面图
+                {"defaultContent":""},			//饰品播放
                 {'data':'created_at'},
                 {"defaultContent":"","className":"td-manager"}
             ],          //对【td】的信息填充
@@ -209,10 +209,10 @@
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
                 type: 'POST',
-                url: '/admin/lesson/del/'+id,
+                url: '/admin/lesson/del/'+id,		//地址把id带上
                 dataType: 'json',
 				headers:{
-                    'X-CSRF-TOKEN':'{{csrf_token()}}'
+                    'X-CSRF-TOKEN':'{{csrf_token()}}'		//需要有个token验证码
 				},
                 success: function(data){
                     $(obj).parents("tr").remove();
@@ -220,7 +220,7 @@
                 },
                 error:function(data) {
                     console.log(data.msg);
-                },
+                }
             });
         });
     }

@@ -159,21 +159,23 @@ class LessonController extends Controller
 				//封面图，上传新的，删除旧的
 				if($form_data['cover_img'] !== $lesson->cover_img){
 					//判断被删除的文件是否存在
-					file_exists('.'.$lesson->cover_img);
-					
-					//删除数据库旧的
-					$cover = str_replace('/storage/','',$lesson->cover_img);			//去除/storage/前缀
-					Storage::disk('public')->delete($cover);
+					if(file_exists('.'.$lesson->cover_img)){		//  需要加个点./storage/lesson/xxx.jpg
+						
+						//删除数据库旧的
+						$cover = str_replace('/storage/','',$lesson->cover_img);			//去除/storage/前缀
+						Storage::disk('public')->delete($cover);
+					}
 				}
 				
 				//视频，上传新的，删除旧的
 				if($form_data['video_address'] !== $lesson->video_address){
 					//判断被删除的文件是否存在
-					file_exists('.'.$lesson->video_address);
-					
-					//删除数据库旧的
-					$video = str_replace('/storage/','',$lesson->video_address);			//去除/storage/前缀
-					Storage::disk('public')->delete($video);
+					if(file_exists('.'.$lesson->video_address)){
+						
+						//删除数据库旧的
+						$video = str_replace('/storage/','',$lesson->video_address);			//去除/storage/前缀
+						Storage::disk('public')->delete($video);
+					}
 				}
 				
 				//修改课时

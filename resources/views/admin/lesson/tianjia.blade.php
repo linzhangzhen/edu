@@ -149,7 +149,7 @@
 			</div>
 		</div>
 
-		{{--授课老师  复选框--}}
+		{{--授课老师  下拉复选框--}}
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>授课老师：</label>
 			<div class="formControls col-xs-8 col-sm-9">

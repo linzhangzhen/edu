@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -137,7 +137,9 @@ return [
 
     'providers' => [
 		Barryvdh\Debugbar\ServiceProvider::class,   #debug调试工具
-		
+		Mews\Captcha\CaptchaServiceProvider::class,		# 声明验证码处理核心类
+	
+	
 		/*
 		 * Laravel Framework Service Providers...
 		 */
@@ -192,7 +194,8 @@ return [
     */
 
     'aliases' => [
-		'Debugbar' => Barryvdh\Debugbar\Facade::class,  #debug调试工具
+		'Debugbar' => Barryvdh\Debugbar\Facade::class, 	 #debug调试工具
+		'Captcha' => Mews\Captcha\Facades\Captcha::class,		#  声明Captcha别名
 	
 		'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
