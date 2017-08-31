@@ -15,6 +15,7 @@ $(window).resize(function() {
 });
 
 /*登录按钮*/
+/*
 $('[name=login]').click(function(){
 	var username = $('[name=username]');
 	var password = $('[name=password]');
@@ -28,4 +29,4 @@ $('[name=login]').click(function(){
 	}else{
 		password.siblings('.verif-span').hide();
 	}
-});
+});*/

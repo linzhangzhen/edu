@@ -17,7 +17,7 @@ class RoleController extends Controller
 	public function index(Request $request)
 	{
 		if($request->isMethod('post')){
-			//获得直播流信息列表
+			//获得信息列表
 			$cnt = Role::count();
 			
 			//A.数据分页（显示条数）
@@ -30,7 +30,7 @@ class RoleController extends Controller
 			$duan = $request->input('columns.'.$n.'.data');  //获得排序的字段
 			$xu = $request->input('order.0.dir');  //排序的顺序 asc/desc
 			
-			//C.模糊检索，（直播流名称和直播名字）
+			//C.模糊检索，
 			$search = $request->input('search.value');  //获得检索的条件值
 			
 			
